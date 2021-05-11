@@ -25,7 +25,8 @@ jobs:
           pipenv_to_requirements
 
       - name: Run tests
-        run: pipenv install --dev
+        run: |
+          pipenv install --dev
           pipenv run python -m unittest discover -p 'test_*.py'
 
       - name: Check in changes to requirements files
