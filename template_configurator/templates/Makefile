@@ -121,9 +121,10 @@ target/docs/index.md: $(SCHEMA_DIR)/$(SCHEMA_NAME).yaml tdir-docs install
 # ---------------------------------------
 # YAML source
 # ---------------------------------------
-gen-model: $(patsubst %, $(PKG_DIR)/model/schema/%.yaml, $(SCHEMA_NAMES))
+gen-model: $(patsubst %, $(PKG_T_SCHEMA)/%.yaml, $(SCHEMA_NAMES))
 
-$(PKG_DIR)/model/schema/%.yaml: model/schema/%.yaml
+$(PKG_T_SCHEMA)/%.yaml: model/schema/%.yaml
+	mkdir -p $(PKG_T_SCHEMA)
 	cp $< $@
 
 # ---------------------------------------
@@ -131,6 +132,7 @@ $(PKG_DIR)/model/schema/%.yaml: model/schema/%.yaml
 # ---------------------------------------
 gen-python: $(patsubst %, $(PKG_T_PYTHON)/%.py, $(SCHEMA_NAMES))
 $(PKG_T_PYTHON)/%.py: target/python/%.py
+	mkdir -p $(PKG_T_PYTHON)
 	cp $< $@
 target/python/%.py: $(SCHEMA_DIR)/%.yaml  tdir-python install
 	$(RUN) gen-python $(GEN_OPTS)  --no-slots --no-mergeimports $< > $@
