@@ -125,7 +125,6 @@ gen-model: $(patsubst %, $(PKG_DIR)/model/schema/%.yaml, $(SCHEMA_NAMES))
 
 $(PKG_DIR)/model/schema/%.yaml: model/schema/%.yaml
 	cp $< $@
-.PHONY: gen-linkml_model
 
 # ---------------------------------------
 # PYTHON Source

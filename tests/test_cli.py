@@ -23,21 +23,21 @@ def _parser_exit(_: argparse.ArgumentParser,  __=0, message: Optional[str]=None)
 
 argparse.ArgumentParser.exit = _parser_exit
 
-expected_file_output = """../../tests/actual/mkdocs.yml written
-../../tests/actual/requirements.txt written
-../../tests/actual/Makefile written
-../../tests/actual/README.md written
-../../tests/actual/Pipfile written
-../../tests/actual/setup.py written
-../../tests/actual/.gitignore written
-../../tests/actual/tox.ini written
-../../tests/actual/setup.cfg written
-../../tests/actual/tests/test_input_against_model.py written
-../../tests/actual/tests/__init__.py written
-../../tests/actual/tests/input/CONFIG.yaml written
-../../tests/actual/tests/input/README.md written
-../../tests/actual/.github/workflows/pypi-publish.yaml written
-../../tests/actual/.github/workflows/main.yaml written
+expected_file_output = """actual/mkdocs.yml written
+actual/requirements.txt written
+actual/Makefile written
+actual/README.md written
+actual/Pipfile written
+actual/setup.py written
+actual/.gitignore written
+actual/tox.ini written
+actual/setup.cfg written
+actual/tests/test_input_against_model.py written
+actual/tests/__init__.py written
+actual/tests/input/CONFIG.yaml written
+actual/tests/input/README.md written
+actual/.github/workflows/pypi-publish.yaml written
+actual/.github/workflows/main.yaml written
 """
 
 
@@ -55,7 +55,6 @@ class TestCLI(unittest.TestCase):
             shutil.rmtree(cls.actual_dir)
         os.makedirs(cls.actual_dir, exist_ok=True)
 
-    @unittest.skip("Help output test skipped until we get tox 60 character line wrap issue fixed")
     def test_help(self):
         """ Make sure the help output works """
         self.maxDiff = None

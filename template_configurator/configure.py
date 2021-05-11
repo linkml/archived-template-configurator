@@ -97,7 +97,7 @@ class Configurator:
                 template_text = template_text.format(**self.config_dict)
             with open(target_file, 'w') as f:
                 f.write(template_text)
-            print(f"{os.path.relpath(target_file, self.template_dir)} written")
+            print(f"{os.path.relpath(target_file, os.getcwd())} written")
 
     @staticmethod
     def strip_config_comments(txt: str) -> str:
@@ -161,4 +161,4 @@ def main(argv: Optional[List[str]] = None) -> None:
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    main()
