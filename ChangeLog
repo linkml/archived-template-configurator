@@ -1,6 +1,8 @@
 CHANGES
 =======
 
+* Get more output to understand why the action is having issues
+* Update tests to deal with different relative start points
 * Fix possible issue in actions test
 * Further makefile fixes
 * Fix typo in make file

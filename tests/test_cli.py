@@ -7,7 +7,7 @@ import unittest
 from contextlib import redirect_stdout, redirect_stderr
 from filecmp import dircmp
 from io import StringIO
-from typing import Optional
+from typing import Optional, Set
 
 from hbreader import hbread
 
@@ -136,25 +136,28 @@ class TestCLI(unittest.TestCase):
                     return False
             return True
 
-        def tweak_output(output: str) -> str:
+        def tweak_output(output: str) -> Set[str]:
             """ Fix relative path issues """
-            return re.sub(r'.*/actual/', 'actual/', output)
+            return as_set(re.sub(r'.*/actual/', 'actual/', output))
+
+        def as_set(txt: str) -> Set[str]:
+            return set(txt.split('\n'))
 
         self.maxDiff = None
         outf = StringIO()
         with redirect_stdout(outf):
             configure.main(['-t', self.actual_dir, self.config_file])
-        self.assertEqual(expected_file_output, tweak_output(outf.getvalue()))
+        self.assertEqual(as_set(expected_file_output), tweak_output(outf.getvalue()))
 
         outf = StringIO()
         with redirect_stdout(outf):
             configure.main(['-t', self.actual_dir, self.config_file])
-        self.assertEqual("", tweak_output(outf.getvalue()))
+        self.assertEqual({""}, tweak_output(outf.getvalue()))
 
         outf = StringIO()
         with redirect_stdout(outf):
             configure.main(['-t', self.actual_dir, '--reset', self.config_file])
-        self.assertEqual(expected_file_output, tweak_output(outf.getvalue()))
+        self.assertEqual(as_set(expected_file_output), tweak_output(outf.getvalue()))
 
         if not are_dir_trees_equal(self.expected_target_dir, self.actual_dir):
             dcmp = dircmp(self.expected_target_dir, self.actual_dir)
