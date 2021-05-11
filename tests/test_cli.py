@@ -140,6 +140,7 @@ class TestCLI(unittest.TestCase):
             """ Fix relative path issues """
             return re.sub(r'.*/actual/', 'actual/', output)
 
+        self.maxDiff = None
         outf = StringIO()
         with redirect_stdout(outf):
             configure.main(['-t', self.actual_dir, self.config_file])
