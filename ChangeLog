@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+* Fix possible issue in actions test
+* Further makefile fixes
+* Fix typo in make file
+
 v0.2.0
 ------
 
