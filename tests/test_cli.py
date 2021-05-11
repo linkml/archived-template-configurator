@@ -38,6 +38,9 @@ actual/tests/input/CONFIG.yaml written
 actual/tests/input/README.md written
 actual/.github/workflows/pypi-publish.yaml written
 actual/.github/workflows/main.yaml written
+actual/model/docs/credits.md written
+actual/model/docs/home.md written
+actual/model/schema/sample_model.yaml written
 """
 
 

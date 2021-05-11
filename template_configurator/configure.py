@@ -39,6 +39,9 @@ default_classifiers = [
 default_template_directory = os.path.join(os.path.dirname(__file__), "templates")
 default_output_directory = os.getcwd()
 
+# Stuff to ignore in the template
+skip_suffixes = [".pyc"]
+
 
 class Configurator:
     """
@@ -80,9 +83,16 @@ class Configurator:
 
     def build(self) -> None:
         """ Walk the template directory processing and transferring files """
+        def do_process(fname) -> bool:
+            for sfx in skip_suffixes:
+                if fname.endswith(sfx):
+                    return False
+            return True
+
         for dirpath, _, fnames in os.walk(self.template_dir):
             for fname in fnames:
-                self.process(dirpath, fname)
+                if do_process(fname):
+                    self.process(dirpath, fname)
 
     def process(self, dirpath: str, fname: str) -> None:
         """ Process dirpath/fname """
