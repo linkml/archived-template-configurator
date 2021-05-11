@@ -133,7 +133,7 @@ gen-python: $(patsubst %, $(PKG_T_PYTHON)/%.py, $(SCHEMA_NAMES))
 $(PKG_T_PYTHON)/%.py: target/python/%.py
 	cp $< $@
 target/python/%.py: $(SCHEMA_DIR)/%.yaml  tdir-python install
-	$(RUN)gen-python $(GEN_OPTS)  --no-slots --no-mergeimports $< > $@
+	$(RUN) gen-python $(GEN_OPTS)  --no-slots --no-mergeimports $< > $@
 
 # ---------------------------------------
 # GRAPHQL Source
