@@ -1,5 +1,5 @@
 [![Pyversions](https://img.shields.io/pypi/pyversions/template-configurator.svg)](https://pypi.python.org/pypi/template-configurator)
-![](https://github.com/template-configurator/template-configurator/workflows/Build/badge.svg)
+![](https://github.com/linkml/template-configurator/workflows/Build/badge.svg)
 [![PyPi](https://img.shields.io/pypi/v/template-configurator.svg)](https://pypi.python.org/pypi/template-configurator)
 
 # template-configurator
