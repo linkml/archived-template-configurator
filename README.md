@@ -5,7 +5,7 @@
 # template-configurator
 Configuration tool for LinkML model based templates.  This tool applies a configuration file, as defined in the
 LinkML [configuration model](https://linkml.github.io/configurator-model/docs) and applies it to the supplied 
-templates.
+templates.  
 
 
 ```text
@@ -27,4 +27,5 @@ optional arguments:
 ```
 
 
-__Note:__ This could really be generalized with very little effort.
+__Note:__ This could really be generalized with very little effort.  It is probably what Jinja looked like
+in its early days ...
