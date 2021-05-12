@@ -9,6 +9,7 @@ from warnings import warn
 from hbreader import hbread
 from jsonasobj2 import as_dict
 from linkml_runtime.loaders import yaml_loader
+from linkml_runtime.utils.formatutils import camelcase
 from template_config_model.config_model import Config
 
 # ================
@@ -72,6 +73,9 @@ class Configurator:
             self.config.model_py_name = self.config.model_name.replace('-', '_')
         if not self.config.model_py_name.isidentifier():
             warn(f"model_py_name ({self.config.model_py_name}) is not a valid identifier")
+        self.config.model_root_class = camelcase(self.config.model_root_class)
+        if not self.config.model_description:
+            self.config.model_description = self.config.model_synopsis
         if keyword.iskeyword(self.config.model_py_name):
             warn(f"model_py_name ({self.config.model_py_name}) is a python keyword")
         if not self.config.model_url:
