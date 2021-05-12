@@ -46,6 +46,28 @@ actual/model/docs/home.md written
 actual/model/schema/sample_model.yaml written
 """
 
+expected_file_output_2 = """actual/mkdocs.yml skipped - copy already exists
+actual/requirements.txt skipped - copy already exists
+actual/Makefile skipped - copy already exists
+actual/README.md skipped - copy already exists
+actual/Pipfile skipped - copy already exists
+actual/setup.py skipped - copy already exists
+actual/.gitignore skipped - copy already exists
+actual/tox.ini skipped - copy already exists
+actual/setup.cfg skipped - copy already exists
+actual/config/README.md skipped - copy already exists
+actual/config/Pipfile skipped - copy already exists
+actual/tests/test_input_against_model.py skipped - copy already exists
+actual/tests/__init__.py skipped - copy already exists
+actual/tests/input/CONFIG.yaml skipped - copy already exists
+actual/tests/input/README.md skipped - copy already exists
+actual/.github/workflows/pypi-publish.yaml skipped - copy already exists
+actual/.github/workflows/main.yaml skipped - copy already exists
+actual/model/docs/credits.md skipped - copy already exists
+actual/model/docs/home.md skipped - copy already exists
+actual/model/schema/sample_model.yaml skipped - copy already exists
+"""
+
 
 class TestCLI(unittest.TestCase):
     cwd = os.path.dirname(__file__)
@@ -153,7 +175,7 @@ class TestCLI(unittest.TestCase):
         outf = StringIO()
         with redirect_stdout(outf):
             configure.main(['-t', self.actual_dir, self.config_file])
-        self.assertEqual({""}, tweak_output(outf.getvalue()))
+        self.assertEqual(as_set(expected_file_output_2), tweak_output(outf.getvalue()))
 
         outf = StringIO()
         with redirect_stdout(outf):

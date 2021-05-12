@@ -98,6 +98,7 @@ class Configurator:
         """ Process dirpath/fname """
         template_file = os.path.join(dirpath, fname)
         target_file = os.path.join(self.target_dir, os.path.relpath(template_file, self.template_dir))
+        rel_target = os.path.relpath(target_file, os.getcwd())
         if self.hard_reset or not os.path.exists(target_file):
             os.makedirs(os.path.dirname(target_file), exist_ok=True)
             template_text = hbread(template_file)
@@ -107,7 +108,9 @@ class Configurator:
                 template_text = template_text.format(**self.config_dict)
             with open(target_file, 'w') as f:
                 f.write(template_text)
-            print(f"{os.path.relpath(target_file, os.getcwd())} written")
+            print(f"{rel_target} written")
+        else:
+            print(f"{rel_target} skipped - copy already exists")
 
     @staticmethod
     def strip_config_comments(txt: str) -> str:
