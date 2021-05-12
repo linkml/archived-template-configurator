@@ -12,4 +12,4 @@
 
 hbreader
 jsonasobj2
-template-config-model
+template-config-model==0.0.3
