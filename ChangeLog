@@ -1,6 +1,10 @@
 CHANGES
 =======
 
+* Yet another diagnostic test
+* Adding diagnostic to get the gh actions issue
+* Update README.md
+* File listings go in different orders
 * Get more output to understand why the action is having issues
 * Update tests to deal with different relative start points
 * Fix possible issue in actions test

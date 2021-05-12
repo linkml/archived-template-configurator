@@ -32,7 +32,7 @@ PKG_T_SCHEMA = $(PKG_T_MODEL)/schema
 
 # Global generation options
 GEN_OPTS = --log_level WARNING
-ENV = export PIPENV_VENV_IN_PROJECT=true && export PIPENV_PIPFILE=config/Pipfile && export PIPENV_IGNORE_VIRTUALENVS=1
+ENV = export PIPENV_VENV_IN_PROJECT=true && export PIPENV_PIPFILE=make-venv/Pipfile && export PIPENV_IGNORE_VIRTUALENVS=1
 RUN = $(ENV) && pipenv run
 
 # ----------------------------------------
@@ -44,15 +44,14 @@ all: install gen
 # We don't want to pollute the python environment with linkml tool specific packages.  For this reason,
 # we install an isolated instance of linkml in the pipenv-linkml directory
 # ---------------------------------------
-install: config/env.lock
+install: make-venv/env.lock
 
-config/env.lock:
-	mkdir -p config
+make-venv/env.lock:
 	$(ENV) && pipenv install
-	touch config/env.lock
+	touch make-venv/env.lock
 
 uninstall:
-	rm -f config/env.lock
+	rm -f make-venv/env.lock
 	$(ENV) && pipenv --rm
 
 # ---------------------------------------
@@ -81,7 +80,7 @@ squeaky-clean: uninstall clean $(patsubst %,squeaky-clean-%,$(PKG_TGTS))
 	find docs/*  ! -name 'README.*' -exec rm -rf {} +
 	find $(PKG_DIR)/model/schema  ! -name 'README.*' -type f -exec rm -f {} +
 	find $(PKG_DIR) -name "*.py" ! -name "__init__.py" ! -name "linkml_files.py" -exec rm -f {} +
-	cd config && $(ENV) && pipenv --rm
+	cd make-venv && $(ENV) && pipenv --rm
 
 squeaky-clean-%: clean
 	find $(PKG_DIR)/$* ! -name 'README.*' ! -name $*  -type f -exec rm -f {} +

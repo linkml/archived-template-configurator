@@ -33,8 +33,8 @@ actual/setup.py written
 actual/.gitignore written
 actual/tox.ini written
 actual/setup.cfg written
-actual/config/README.md written
-actual/config/Pipfile written
+actual/make-venv/README.md written
+actual/make-venv/Pipfile written
 actual/tests/test_input_against_model.py written
 actual/tests/__init__.py written
 actual/tests/input/CONFIG.yaml written
@@ -55,8 +55,8 @@ actual/setup.py skipped - copy already exists
 actual/.gitignore skipped - copy already exists
 actual/tox.ini skipped - copy already exists
 actual/setup.cfg skipped - copy already exists
-actual/config/README.md skipped - copy already exists
-actual/config/Pipfile skipped - copy already exists
+actual/make-venv/README.md skipped - copy already exists
+actual/make-venv/Pipfile skipped - copy already exists
 actual/tests/test_input_against_model.py skipped - copy already exists
 actual/tests/__init__.py skipped - copy already exists
 actual/tests/input/CONFIG.yaml skipped - copy already exists
@@ -83,7 +83,7 @@ class TestCLI(unittest.TestCase):
             shutil.rmtree(cls.actual_dir)
         os.makedirs(cls.actual_dir, exist_ok=True)
 
-    @unittest.skip("Disabled to to tox line folding at 60 characters")
+    @unittest.skipIf(os.environ.get('IN_TOX', False), "Disabled to to tox line folding at 60 characters")
     def test_help(self):
         """ Make sure the help output works """
         self.maxDiff = None
@@ -169,7 +169,6 @@ class TestCLI(unittest.TestCase):
         outf = StringIO()
         with redirect_stdout(outf):
             configure.main(['-t', self.actual_dir, self.config_file])
-        print(outf.getvalue())
         self.assertEqual(as_set(expected_file_output), tweak_output(outf.getvalue()))
 
         outf = StringIO()
