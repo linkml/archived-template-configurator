@@ -1,6 +1,16 @@
 CHANGES
 =======
 
+* CamelCase the model root class.  Default description to synopsis if not supplied
+* Add virtualenv requirement
+* Update the sample so it parses
+
+v0.3.0
+------
+
+* Automatically generated requirements.txt and requirements-dev.txt
+* Add tne new directory
+* Rename template/config to template/make-venv
 * Yet another diagnostic test
 * Adding diagnostic to get the gh actions issue
 * Update README.md

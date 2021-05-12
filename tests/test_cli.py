@@ -76,6 +76,7 @@ class TestCLI(unittest.TestCase):
     actual_dir = os.path.join(cwd, 'actual')
     help_fname = os.path.join(expected_dir, 'help')
     config_file = os.path.join(cwd, 'test_config/CONFIG.yaml')
+    test_template_dir = os.path.join(cwd, 'input/templates')
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -168,12 +169,16 @@ class TestCLI(unittest.TestCase):
         self.maxDiff = None
         outf = StringIO()
         with redirect_stdout(outf):
-            configure.main(['-t', self.actual_dir, self.config_file])
+            configure.main(['-t', self.actual_dir,
+                            '--templatedir', self.test_template_dir,
+                            self.config_file])
         self.assertEqual(as_set(expected_file_output), tweak_output(outf.getvalue()))
 
         outf = StringIO()
         with redirect_stdout(outf):
-            configure.main(['-t', self.actual_dir, self.config_file])
+            configure.main(['-t', self.actual_dir,
+                            '--templatedir', self.test_template_dir,
+                            self.config_file])
         self.assertEqual(as_set(expected_file_output_2), tweak_output(outf.getvalue()))
 
         outf = StringIO()
@@ -182,7 +187,9 @@ class TestCLI(unittest.TestCase):
         self.assertEqual(as_set(expected_file_output), tweak_output(outf.getvalue()))
 
         if not are_dir_trees_equal(self.expected_target_dir, self.actual_dir):
-            dcmp = dircmp(self.expected_target_dir, self.actual_dir)
+            dcmp = dircmp(self.expected_target_dir,
+                          '--templatedir', self.test_template_dir,
+                          self.actual_dir)
             print(dcmp.report())
             self.fail("Expected output doesn't match actual")
 
