@@ -147,6 +147,7 @@ class TestCLI(unittest.TestCase):
         outf = StringIO()
         with redirect_stdout(outf):
             configure.main(['-t', self.actual_dir, self.config_file])
+        print(outf.getvalue())
         self.assertEqual(as_set(expected_file_output), tweak_output(outf.getvalue()))
 
         outf = StringIO()
