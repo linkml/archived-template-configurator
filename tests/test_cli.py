@@ -183,7 +183,9 @@ class TestCLI(unittest.TestCase):
 
         outf = StringIO()
         with redirect_stdout(outf):
-            configure.main(['-t', self.actual_dir, '--reset', self.config_file])
+            configure.main(['-t', self.actual_dir, '--reset',
+                            '--templatedir', self.test_template_dir,
+                            self.config_file])
         self.assertEqual(as_set(expected_file_output), tweak_output(outf.getvalue()))
 
         if not are_dir_trees_equal(self.expected_target_dir, self.actual_dir):
