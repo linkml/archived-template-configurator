@@ -215,8 +215,8 @@ target/jsonld_context/%.model.context.jsonld: $(SCHEMA_DIR)/%.yaml tdir-jsonld_c
 # ---------------------------------------
 # Plain Old (PO) JSON
 # ---------------------------------------
-gen-json: $(patsubst %, $(PKG_T_JSON)/%.json, $(SCHEMA_NAMES))
-.PHONY: gen-json
+gen-jsonld: $(patsubst %, $(PKG_T_JSON)/%.json, $(SCHEMA_NAMES))
+.PHONY: gen-jsonld
 
 $(PKG_T_JSON)/%.json: target/json/%.json
 	mkdir -p $(PKG_T_JSON)
