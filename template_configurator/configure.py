@@ -110,7 +110,7 @@ class Configurator:
                 template_text = self.special_processing[fname](self, template_text)
             else:
                 template_text = template_text.format(**self.config_dict)
-            with open(target_file, 'w') as f:
+            with open(target_file, "w", encoding="utf-8") as f:
                 f.write(template_text)
             print(f"{rel_target} written")
         else:
