@@ -26,6 +26,9 @@ optional arguments:
   --reset               Hard reset -- regenerate all files from scratch
 ```
 
+See slides for more background: 
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQBboArJfptgWfDO5HGZ8_AXbv1ExygRXL-9wVDpLfBnC2xw1n_igdUsigpV2W6MtO-Grd1gj7wfCpH/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 __Note:__ This could really be generalized with very little effort.  It is probably what Jinja looked like
 in its early days ...
